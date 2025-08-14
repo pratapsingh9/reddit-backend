@@ -1,4 +1,4 @@
-import type { Post, Comment } from "../types/index.js";
+import type { Post, Comment, Community } from "../types/index.js";
 
 export const posts: Post[] = [
   {
@@ -53,6 +53,17 @@ export const comments: Comment[] = [
     time: "2h",
     votes: 15,
   },
+];
+
+export const communities: Community[] = [
+  { id: "c1", name: "r/aww", members: 5230000 },
+  { id: "c2", name: "r/todayilearned", members: 33000000 },
+  { id: "c3", name: "r/food", members: 24000000 },
+];
+
+export const notifications = [
+  { id: 'n1', title: 'Welcome to the app', body: 'Thanks for joining!', time: '1d' },
+  { id: 'n2', title: 'New comment', body: 'Someone commented on your post', time: '5h' },
 ];
 
 

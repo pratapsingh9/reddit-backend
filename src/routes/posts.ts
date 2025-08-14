@@ -19,6 +19,27 @@ router.get("/", (req: Request, res: Response) => {
   res.json(sorted);
 });
 
+// Create post (in-memory)
+router.post("/", (req: Request, res: Response) => {
+  const { title, subreddit, author, content, image } = req.body ?? {};
+  if (!title || !subreddit) {
+    return res.status(400).json({ error: "title and subreddit are required" });
+  }
+  const newPost = {
+    id: String(Date.now()),
+    title: String(title),
+    subreddit: String(subreddit),
+    author: (author && String(author)) || "u/you",
+    time: "just now",
+    upvotes: 0,
+    comments: 0,
+    ...(content ? { content: String(content) } : {}),
+    ...(image ? { image: String(image) } : {}),
+  } as any;
+  posts.unshift(newPost);
+  res.status(201).json(newPost);
+});
+
 // Post detail
 router.get("/:id", (req: Request, res: Response) => {
   const post = posts.find((p) => p.id === req.params.id);
